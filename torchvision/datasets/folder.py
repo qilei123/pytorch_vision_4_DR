@@ -84,7 +84,7 @@ class DatasetFolder(data.Dataset):
         classes, class_to_idx = self._find_classes(root)
         samples = make_dataset(root, class_to_idx, extensions)
         random.shuffle(samples)
-        print(samples)
+        #print(samples)
         if len(samples) == 0:
             raise(RuntimeError("Found 0 files in subfolders of: " + root + "\n"
                                "Supported extensions are: " + ",".join(extensions)))
@@ -146,8 +146,8 @@ class DatasetFolder(data.Dataset):
             sample = self.transform(sample)
         if self.target_transform is not None:
             target = self.target_transform(target)
-        print(path)
-        print(target)
+        #print(path)
+        #print(target)
         return sample, target
 
     def __len__(self):
