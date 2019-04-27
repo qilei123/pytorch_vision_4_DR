@@ -99,6 +99,7 @@ class DatasetFolder(data.Dataset):
         self.transform = transform
         self.target_transform = target_transform
         self.classes_count = np.zeros(len(classes))
+        self.circle=0
 
     def _find_classes(self, dir):
         """
@@ -130,8 +131,12 @@ class DatasetFolder(data.Dataset):
         Returns:
             tuple: (sample, target) where target is class_index of the target class.
         """
-
-        path, target = self.samples[index]
+        target=-1
+        while target!=self.circle:
+            path, target = self.samples[int(self.classes_count[circle])]
+            self.classes_count[circle]+=1
+            if self.classes_count[circle]==len(self.samples):
+                self.classes_count[circle]=0
         sample = self.loader(path)
         if self.transform is not None:
             sample = self.transform(sample)
