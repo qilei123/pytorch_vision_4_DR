@@ -133,10 +133,12 @@ class DatasetFolder(data.Dataset):
         """
         target=-1
         while target!=self.circle:
-            path, target = self.samples[int(self.classes_count[circle])]
-            self.classes_count[circle]+=1
-            if self.classes_count[circle]==len(self.samples):
-                self.classes_count[circle]=0
+            path, target = self.samples[int(self.classes_count[self.circle])]
+            self.classes_count[self.circle]+=1
+            self.classes_count[self.circle]=self.classes_count[self.circle]%len(self.samples)
+            #self.classes_count[self.circle]=0
+        self.circle+=1
+        self.circle=self.circle%len(self.classes)
         sample = self.loader(path)
         if self.transform is not None:
             sample = self.transform(sample)
