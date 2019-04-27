@@ -134,7 +134,7 @@ class DatasetFolder(data.Dataset):
             sample = self.transform(sample)
         if self.target_transform is not None:
             target = self.target_transform(target)
-
+        print(path)
         return sample, target
 
     def __len__(self):
