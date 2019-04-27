@@ -83,6 +83,7 @@ class DatasetFolder(data.Dataset):
     def __init__(self, root, loader, extensions, transform=None, target_transform=None):
         classes, class_to_idx = self._find_classes(root)
         samples = make_dataset(root, class_to_idx, extensions)
+        print(samples)
         if len(samples) == 0:
             raise(RuntimeError("Found 0 files in subfolders of: " + root + "\n"
                                "Supported extensions are: " + ",".join(extensions)))
@@ -136,8 +137,7 @@ class DatasetFolder(data.Dataset):
             path, target = self.samples[int(self.classes_count[self.circle])]
             self.classes_count[self.circle]+=1
             self.classes_count[self.circle]=self.classes_count[self.circle]%len(self.samples)
-            print(self.classes_count)
-            #self.classes_count[self.circle]=0
+            #print(self.classes_count)
         self.circle+=1
         self.circle=self.circle%len(self.classes)
         sample = self.loader(path)
