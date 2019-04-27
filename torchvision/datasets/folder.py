@@ -6,7 +6,7 @@ import os
 import os.path
 import sys
 import numpy as np
-
+import random
 
 def has_file_allowed_extension(filename, extensions):
     """Checks if a file is an allowed extension.
@@ -83,6 +83,7 @@ class DatasetFolder(data.Dataset):
     def __init__(self, root, loader, extensions, transform=None, target_transform=None):
         classes, class_to_idx = self._find_classes(root)
         samples = make_dataset(root, class_to_idx, extensions)
+        samples = random.shuffle(samples)
         print(samples)
         if len(samples) == 0:
             raise(RuntimeError("Found 0 files in subfolders of: " + root + "\n"
