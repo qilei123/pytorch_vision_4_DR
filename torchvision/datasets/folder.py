@@ -136,6 +136,7 @@ class DatasetFolder(data.Dataset):
             path, target = self.samples[int(self.classes_count[self.circle])]
             self.classes_count[self.circle]+=1
             self.classes_count[self.circle]=self.classes_count[self.circle]%len(self.samples)
+            print(self.classes_count)
             #self.classes_count[self.circle]=0
         self.circle+=1
         self.circle=self.circle%len(self.classes)
