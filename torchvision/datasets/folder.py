@@ -5,6 +5,7 @@ from PIL import Image
 import os
 import os.path
 import sys
+import numpy as np
 
 
 def has_file_allowed_extension(filename, extensions):
@@ -97,6 +98,7 @@ class DatasetFolder(data.Dataset):
 
         self.transform = transform
         self.target_transform = target_transform
+        self.classes_count = np.zeros(len(classes))
 
     def _find_classes(self, dir):
         """
@@ -128,6 +130,7 @@ class DatasetFolder(data.Dataset):
         Returns:
             tuple: (sample, target) where target is class_index of the target class.
         """
+
         path, target = self.samples[index]
         sample = self.loader(path)
         if self.transform is not None:
@@ -135,6 +138,7 @@ class DatasetFolder(data.Dataset):
         if self.target_transform is not None:
             target = self.target_transform(target)
         print(path)
+        print(target)
         return sample, target
 
     def __len__(self):
